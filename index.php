@@ -1,3 +1,22 @@
+<?php 
+// Connect to database
+$servername = "localhost";
+$username = "root";
+$password = "";
+$database = "notes";
+
+// Create a connection
+$conn = mysqli_connect($servername, $username, $password, $database);
+
+// Die if connection was not successful
+if (!$conn){
+    die("Sorry we failed to connect: ". mysqli_connect_error());
+}
+else{
+    echo "Connection was successful<br>";
+}
+
+?>
 <!doctype html>
 <html lang="en">
 
@@ -39,22 +58,22 @@
         </div>
     </nav>
     <div class="container my-4">
+        <h2>Add a Note</h2>
         <form>
             <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Email address</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                <label for="title" class="form-label">Note Title</label>
+                <input type="text" class="form-control" id="title" aria-describedby="emailHelp">
             </div>
             <div class="mb-3">
-                <label for="exampleInputPassword1" class="form-label">Password</label>
-                <input type="password" class="form-control" id="exampleInputPassword1">
+                <label for="desc" class="form-label">Note Description</label>
+                <textarea class="form-control" id="desc" name="desc" rows="3"></textarea>
             </div>
-            <div class="mb-3 form-check">
-                <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                <label class="form-check-label" for="exampleCheck1">Check me out</label>
-            </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary">Add Note</button>
         </form>
+    </div>
+    <div class="container">
+        <?php ?>
+
     </div>
 
     <!-- Optional JavaScript; choose one of the two! -->
