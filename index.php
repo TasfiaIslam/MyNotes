@@ -12,9 +12,6 @@ $conn = mysqli_connect($servername, $username, $password, $database);
 if (!$conn){
     die("Sorry we failed to connect: ". mysqli_connect_error());
 }
-else{
-    echo "Connection was successful<br>";
-}
 
 ?>
 <!doctype html>
@@ -72,7 +69,32 @@ else{
         </form>
     </div>
     <div class="container">
-        <?php ?>
+        
+        <table class="table">
+            <thead>
+                <tr>
+                <th scope="col">S.No</th>
+                <th scope="col">Title</th>
+                <th scope="col">Description</th>
+                <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php 
+                    $sql = "SELECT * from `notes`";
+                    $result = mysqli_query($conn, $sql);
+                    while($row = mysqli_fetch_assoc($result)){
+                        echo " <tr>
+                        <th scope='row'>".$row['sno']."</th>
+                        <td> ". $row['title'] . "</td>
+                        <td>" . $row['description'] ."</td>
+                        <td>Actions</td>
+                        </tr>";
+                    }
+                ?>
+               
+            </tbody>
+        </table>
 
     </div>
 
