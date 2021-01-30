@@ -12,6 +12,25 @@ $conn = mysqli_connect($servername, $username, $password, $database);
 if (!$conn){
     die("Sorry we failed to connect: ". mysqli_connect_error());
 }
+if ($_SERVER['REQUEST_METHOD'] == "POST"){
+    // echo $_POST["title"];
+    // exit();
+    $title = $_POST["title"];
+    $description = $_POST["description"];
+
+    
+    // Sql query to be executed
+    $sql = "INSERT INTO `notes` (`title`,`description`) VALUES('$title','$description')";
+    // echo $sql;
+    // exit();
+    $result = mysqli_query($conn, $sql);
+    if($result){
+       echo "Record has been successfully inserted<br>";
+    }
+    else{
+        echo "Record failed to be inserted<br>".mysqli_error($conn);
+    }
+}
 
 ?>
 <!doctype html>
@@ -56,14 +75,14 @@ if (!$conn){
     </nav>
     <div class="container my-4">
         <h2>Add a Note</h2>
-        <form>
+        <form action="/crud/index.php" method="POST">
             <div class="mb-3">
                 <label for="title" class="form-label">Note Title</label>
-                <input type="text" class="form-control" id="title" aria-describedby="emailHelp">
+                <input type="text" class="form-control" id="title" name="title" aria-describedby="emailHelp">
             </div>
             <div class="mb-3">
                 <label for="desc" class="form-label">Note Description</label>
-                <textarea class="form-control" id="desc" name="desc" rows="3"></textarea>
+                <textarea class="form-control" id="description" name="description" rows="3"></textarea>
             </div>
             <button type="submit" class="btn btn-primary">Add Note</button>
         </form>
